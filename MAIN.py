@@ -12,8 +12,9 @@ class position:
         count = 0
         if abs(x) == 1 or abs(x) == board:
             count+=1
-            if abs(y) == 1 or abs(y) == board:
-                count+=1
+        if abs(y) == 1 or abs(y) == board:
+            count+=1
+        
         # This whole section is just for debugging, use the count to determine the positions
         if count == 0:
             self.statep ="center"
@@ -22,7 +23,7 @@ class position:
         if count == 2:
             self.statep ="corner"
         self.state = count
-        print(self.x,self.y, self.state, self.statep)
+        # print(self.x,self.y, self.state, self.statep)
 
 def sizeinput():
     """Function to query the board size at the start of the game"""
@@ -44,22 +45,23 @@ def sizeinput():
 def c(piece):
     if piece.status == 0:
         # Empty
-        return "+"
+        return "+ "
     elif piece.status == 1:
         # White
-        return '\u25CB'
+        return '\u25CB '
     elif piece.status == 2:
         # Black
-        return '\u25CF'
+        return '\u25CF '
 
-def printBoard():
+def printBoard(game_size, piece_list):
     """Function used to print the fresh board state after each turn"""
     # Has to call each individual position class to get the current state
-    w = '\u25CB'
-    b = '\u25CF'
+    count = 0
     for x in range(game_size):
+        print("")
         for y in range(game_size):
-            pass
+            print(c(piece_list[count]), end="")
+            count +=1
     pass
 
 def requery():
@@ -68,11 +70,12 @@ def requery():
 
 if __name__ == "__main__":
     game_size = sizeinput()
+    positions = []
     for x in range(game_size):
         for y in range(game_size):
             xmod = x + 1
             ymod = y + 1
-            str(str(modx)+str(mody)) = position(xmod, ymod, game_size)
-            # Need to use something else for this, maybe a dictionary? 
-    printBoard()
+            positions.append(position(xmod, ymod, game_size))
+    print(len(positions))
+    printBoard(game_size, positions)
 
