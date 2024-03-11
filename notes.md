@@ -50,5 +50,9 @@ We will need to define 3 different types of classes.  The basic board space, the
 ## Game Operation
 Every turn, a player will place a piece and then the game will poll the remaining pieces on the board to determine groups and whether the group is captured or not.  A captured group will updated during this polling period and add to the players score.  
 
+We can break down each move to verify that the individual characters are acceptable for a valid move.  For instance prior to even entering the information into a move slot, we would look at a move, A 1, and verify that both characters, A and 1 are within acceptable ranges for hte given board.  
+
 ## Coordinate System
 There are various ways of recording game coordinates on the Go Board.  American standards, known as Style A1, record the bottom right of the board as A1 while japanese standards of recording is known as Style 1-1, which records the upper left corner as 1-1 and the bottom right as 19-19.  I believe there is one more method for recording game coordinates. This could be something to poll for and determine if the user would prefer for game recording.  
+
+

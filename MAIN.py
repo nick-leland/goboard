@@ -1,3 +1,5 @@
+import string
+
 class position:
     """The baseline class for the definition of a space"""
     def __init__(self, x, y, board):
@@ -62,11 +64,35 @@ def printBoard(game_size, piece_list):
         for y in range(game_size):
             print(c(piece_list[count]), end="")
             count +=1
+    print("\n")
     pass
 
-def requery():
+def verification(chars, game_size):
+    """Function to verify that the input for a move is within acceptable board range"""
+    x = list(chars)
+    x[0] = str.capitalize(x[0]) #This can probably be optimized in the future check time constraints
+    accep_chars = []
+    accep_num = []
+    for _ in range(game_size):
+        accep_chars.append(string.ascii_uppercase[_])
+        accep_num.append(str(_+1))
+    if x[0] in accep_chars and x[1] in accep_num:
+        print("Valid entry")
+        return
+    else:
+        print("Not a valid entry")
+        pass
+
     """Function to refresh the turn of the game, including piece removal"""
+    printBoard(game_size, positions)
     pass
+
+def passcount(pm, cm):
+    """Used to determine if both players pass to conclude the match."""
+    if pm == cm:
+        return True
+    else:
+        return False
 
 if __name__ == "__main__":
     game_size = sizeinput()
@@ -76,6 +102,17 @@ if __name__ == "__main__":
             xmod = x + 1
             ymod = y + 1
             positions.append(position(xmod, ymod, game_size))
-    print(len(positions))
-    printBoard(game_size, positions)
+    wincon = False
+    print("If help is required type 'help'.")
+    while wincon == False:
+        requery(game_size, positions)
+        move = input("Input move in A1 notation.", "\n")
+        if move == 'pass':
+            continue
+        elif move == 'help':
+            "You don't need help"
+        else:
+            verification(move, game_size)
+            
 
+    print("\n", "Game has been concluded.", "\n")
